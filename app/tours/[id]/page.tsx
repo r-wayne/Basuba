@@ -123,7 +123,7 @@ export default function TourDetailPage() {
             <div className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                 <CheckCircle2 className="w-6 h-6 text-green-600" />
-                What's Included
+                What&#39;s Included
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {tour.included?.map((item, idx) => (
@@ -135,27 +135,34 @@ export default function TourDetailPage() {
               </div>
             </div>
 
-            {tour.itinerary && tour.itinerary.length > 0 && (
-              <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <Calendar className="w-6 h-6 text-amber-600" />
-                  Detailed Itinerary
-                </h2>
-                <div className="space-y-6">
-                  {tour.itinerary.map((day: any, idx: number) => (
-                    <div key={idx} className="flex gap-4">
-                      <div className="flex-shrink-0 w-16 h-16 bg-amber-100 rounded-xl flex items-center justify-center font-bold text-amber-700 text-lg">
-                        Day {day.day}
+            {(() => {
+              const itinerary = typeof tour.itinerary === 'string' ? JSON.parse(tour.itinerary) : tour.itinerary;
+              return itinerary && itinerary.length > 0 && (
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <Calendar className="w-6 h-6 text-amber-600" />
+                    Detailed Itinerary
+                  </h2>
+                  <div className="space-y-6">
+                    {itinerary.map((day: any, idx: number) => (
+                      <div key={idx} className="flex gap-4">
+                        <div className="flex-shrink-0 w-16 h-16 bg-amber-100 rounded-xl flex items-center justify-center font-bold text-amber-700 text-lg">
+                          Day {day.day}
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-semibold text-gray-900 mb-2">Day {day.day} Activities</h3>
+                          <ul className="text-gray-700 leading-relaxed list-disc list-inside">
+                            {day.activities.map((activity: string, actIdx: number) => (
+                              <li key={actIdx}>{activity}</li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">{day.title}</h3>
-                        <p className="text-gray-700 leading-relaxed">{day.description}</p>
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              );
+            })()}
           </div>
 
           <div className="lg:col-span-1">
@@ -194,7 +201,7 @@ export default function TourDetailPage() {
                 </Button>
 
                 <p className="text-xs text-gray-500 text-center">
-                  You won't be charged yet. Booking details will be sent to WhatsApp for confirmation.
+                  You won&#39;t be charged yet. Booking details will be sent to WhatsApp for confirmation.
                 </p>
               </CardContent>
             </Card>

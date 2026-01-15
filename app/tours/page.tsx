@@ -170,7 +170,7 @@ export default function ToursPage() {
                       <div>
                         <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
                           <CheckCircle2 className="w-5 h-5 text-green-600" />
-                          What's Included
+                          What&#39;s Included
                         </h4>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                           {tour.included?.map((item, idx) => (
@@ -182,24 +182,24 @@ export default function ToursPage() {
                         </div>
                       </div>
 
-                      {tour.itinerary && tour.itinerary.length > 0 && (
+                      {(() => { const itinerary = Array.isArray(tour.itinerary) ? tour.itinerary : JSON.parse(tour.itinerary || '[]'); return itinerary && itinerary.length > 0; })() && (
                         <div>
                           <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
                             <Calendar className="w-5 h-5 text-amber-600" />
                             Itinerary Highlights
                           </h4>
                           <div className="space-y-2">
-                            {tour.itinerary.slice(0, 3).map((day: any, idx: number) => (
+                            {(() => { const itinerary = Array.isArray(tour.itinerary) ? tour.itinerary : JSON.parse(tour.itinerary || '[]'); return itinerary.slice(0, 3).map((day: any, idx: number) => (
                               <div key={idx} className="flex gap-3">
                                 <div className="flex-shrink-0 w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center font-bold text-amber-700">
                                   Day {day.day}
                                 </div>
                                 <div>
-                                  <div className="font-medium text-gray-900">{day.title}</div>
-                                  <div className="text-sm text-gray-600">{day.description}</div>
+                                  <div className="font-medium text-gray-900">Day {day.day} Activities</div>
+                                  <div className="text-sm text-gray-600">{day.activities.join(', ')}</div>
                                 </div>
                               </div>
-                            ))}
+                            )); })()}
                           </div>
                         </div>
                       )}
