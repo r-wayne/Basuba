@@ -14,29 +14,7 @@ import Image from 'next/image';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const [logoSrc, setLogoSrc] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Check if logo exists and set the correct src
-    const checkLogo = async () => {
-      const formats = ['png', 'jpg', 'jpeg', 'svg', 'webp'];
-
-      for (const format of formats) {
-        try {
-          const response = await fetch(`/assets/logo.${format}`);
-          if (response.ok) {
-            setLogoSrc(`/assets/logo.${format}`);
-            return;
-          }
-        } catch {}
-      }
-
-      // No logo found
-      setLogoSrc(null);
-    };
-
-    checkLogo();
-  }, []);
+  const [logoSrc, setLogoSrc] = useState<string>('/assets/logo.png');
 
   const navLinks = [
     { href: '/', label: 'Home' },
@@ -69,6 +47,7 @@ export function Navigation() {
                 width={200}
                 height={200}
                 className="h-[120px] w-[120px] md:h-[160px] md:w-[160px] lg:h-[180px] lg:w-[180px] object-contain group-hover:scale-110 transition-transform"
+                onError={() => setLogoSrc(null as any)}
               />
             ) : (
               <div className="bg-gradient-to-br from-amber-600 to-orange-700 p-4 rounded-lg group-hover:scale-110 transition-transform">

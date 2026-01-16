@@ -136,7 +136,7 @@ export default function TourDetailPage() {
             </div>
 
             {(() => {
-              const itinerary = typeof tour.itinerary === 'string' ? JSON.parse(tour.itinerary) : tour.itinerary;
+              const itinerary = typeof tour.itinerary === 'string' ? (() => { try { return JSON.parse(tour.itinerary); } catch { return []; } })() : tour.itinerary;
               return itinerary && itinerary.length > 0 && (
                 <div className="mb-8">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
