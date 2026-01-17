@@ -7,12 +7,12 @@ import { Footer } from '@/components/footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Basuba Adventures - Authentic African Safari Experiences',
-  description: 'Experience the magic of Africa with Basuba Adventures. Expertly crafted safari tours across Kenya, Tanzania, Uganda, and more. Luxury accommodations and unforgettable wildlife encounters.',
+  title: 'Basuba Adventures | Authentic Kenya Safari Tours & Gorilla Trekking',
+  description: 'Book authentic African safaris with Basuba Adventures. Maasai Mara, Serengeti, Uganda gorilla trekking. Expert guides, luxury camps. Start your adventure today.',
   openGraph: {
     images: [
       {
-        url: 'https://images.pexels.com/photos/2356059/pexels-photo-2356059.jpeg',
+        url: 'https://basubaadventures.com/logo.png',
       },
     ],
   },
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     images: [
       {
-        url: 'https://images.pexels.com/photos/2356059/pexels-photo-2356059.jpeg',
+        url: 'https://basubaadventures.com/logo.png',
       },
     ],
   },
