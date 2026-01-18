@@ -89,8 +89,10 @@ export function BookingDialog({
          `Guests: ${formData.number_of_guests}\n` +
          `Booking: ${itemName} (${bookingType})\n` +
          `Dates: ${format(startDate!, 'PPP')} - ${format(endDate!, 'PPP')}\n` +
-         `Total Price: KES ${calculateTotalPrice().toLocaleString()}\n` +
-         `Deposit Required: KES ${calculateDeposit().toLocaleString()}\n` +
+         `Total Price: $ ${calculateTotalPrice().toLocaleString()}\n` +
+         `Deposit Required: $ ${calculateDeposit().toLocaleString()}\n` +
+         `M-Pesa Paybill: 222111\n` +
+         `Account Number: 2321644\n` +
          `${formData.special_requests ? `Special Requests: ${formData.special_requests}\n` : ''}` +
          `\nPlease confirm this booking.`
        );
@@ -138,7 +140,7 @@ export function BookingDialog({
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-2">Booking Confirmed!</h3>
             <p className="text-gray-600">
-              Thank you for your booking. We'll contact you shortly at {formData.guest_email} to confirm details.
+              Thank you for your booking. We&apos;ll contact you shortly at {formData.guest_email} to confirm details.
             </p>
           </div>
         </DialogContent>
@@ -152,7 +154,7 @@ export function BookingDialog({
         <DialogHeader>
           <DialogTitle className="text-2xl">Book {itemName}</DialogTitle>
           <DialogDescription>
-            Fill in your details to complete your booking. We'll contact you to confirm.
+            Fill in your details to complete your booking. We&apos;ll contact you to confirm.
           </DialogDescription>
         </DialogHeader>
 
@@ -233,7 +235,7 @@ export function BookingDialog({
               </Popover>
             </div>
 
-            {bookingType === 'hotel' && (
+            {(bookingType === 'hotel' || bookingType === 'airbnb') && (
               <div className="space-y-2">
                 <Label>End Date *</Label>
                 <Popover>
@@ -273,13 +275,13 @@ export function BookingDialog({
                <div className="flex justify-between items-center">
                  <span className="text-lg font-semibold text-gray-900">Total Price:</span>
                  <span className="text-2xl font-bold text-amber-600">
-                   KES {calculateTotalPrice().toLocaleString()}
+                   $ {calculateTotalPrice().toLocaleString()}
                  </span>
                </div>
                <div className="flex justify-between items-center">
                  <span className="text-lg font-semibold text-gray-900">Required Deposit (50%):</span>
                  <span className="text-xl font-bold text-red-600">
-                   KES {calculateDeposit().toLocaleString()}
+                   $ {calculateDeposit().toLocaleString()}
                  </span>
                </div>
                <p className="text-sm text-gray-600">
@@ -293,6 +295,13 @@ export function BookingDialog({
                <div className="bg-white border border-amber-300 rounded-lg p-3">
                  <p className="text-sm text-amber-800">
                    <strong>Deposit Policy:</strong> A 50% deposit is required to confirm your booking. The remaining balance is due upon arrival.
+                 </p>
+               </div>
+               <div className="bg-green-50 border border-green-300 rounded-lg p-3">
+                 <p className="text-sm text-green-800">
+                   <strong>Payment Information:</strong><br />
+                   M-Pesa Paybill: <strong>222111</strong><br />
+                   Account Number: <strong>2321644</strong>
                  </p>
                </div>
              </div>

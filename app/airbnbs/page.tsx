@@ -12,36 +12,38 @@ import Link from 'next/link';
 
 export default function AirbnbsPage() {
   const searchParams = useSearchParams();
-  const destinationFilter = searchParams.get('destination');
+  const regionFilter = searchParams.get('region');
+  const maxPriceFilter = searchParams.get('maxPrice');
 
   const [airbnbs, setAirbnbs] = useState<(Airbnb & { destination?: Destination })[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedAirbnb, setSelectedAirbnb] = useState<Airbnb | null>(null);
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [priceFilter, setPriceFilter] = useState<number | null>(maxPriceFilter ? parseInt(maxPriceFilter) : null);
 
   useEffect(() => {
     async function fetchAirbnbs() {
-      let query = supabase.from('airbnbs').select('*, destinations(*)');
-
-      if (destinationFilter) {
-        query = query.eq('destination_id', destinationFilter);
-      }
-
-      const { data, error } = await query.order('price_per_night');
+      const { data, error } = await supabase.from('airbnbs').select('*, destinations(*)').order('price_per_night');
 
       if (data && !error) {
-        setAirbnbs(
-          data.map((airbnb: any) => ({
-            ...airbnb,
-            destination: airbnb.destinations,
-          }))
-        );
+        let filteredAirbnbs = data.map((airbnb: any) => ({
+          ...airbnb,
+          destination: airbnb.destinations,
+        }));
+
+        if (regionFilter) {
+          filteredAirbnbs = filteredAirbnbs.filter(airbnb =>
+            airbnb.destination?.name?.toLowerCase().includes(regionFilter.toLowerCase())
+          );
+        }
+
+        setAirbnbs(filteredAirbnbs);
       }
       setLoading(false);
     }
 
     fetchAirbnbs();
-  }, [destinationFilter]);
+  }, [regionFilter]);
 
   const handleBookNow = (airbnb: Airbnb) => {
     setSelectedAirbnb(airbnb);
@@ -72,13 +74,38 @@ export default function AirbnbsPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {airbnbs.length === 0 ? (
+        {/* Filter Section */}
+        <div className="mb-8 bg-white rounded-lg shadow-sm border p-6">
+          <h3 className="text-lg font-semibold mb-4">Filter Airbnbs</h3>
+          <div className="flex flex-wrap gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Max Price (USD)</label>
+              <input
+                type="number"
+                placeholder="Any price"
+                value={priceFilter || ''}
+                onChange={(e) => setPriceFilter(e.target.value ? parseInt(e.target.value) : null)}
+                className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+              />
+            </div>
+            <div className="flex items-end">
+              <Button
+                onClick={() => setPriceFilter(null)}
+                variant="outline"
+              >
+                Clear Filters
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {airbnbs.filter(airbnb => !priceFilter || airbnb.price_per_night <= priceFilter).length === 0 ? (
           <div className="text-center py-16">
             <p className="text-xl text-gray-600">No Airbnbs found for this destination.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {airbnbs.map((airbnb) => (
+            {airbnbs.filter(airbnb => !priceFilter || airbnb.price_per_night <= priceFilter).map((airbnb) => (
               <Card key={airbnb.id} className="overflow-hidden hover:shadow-2xl transition-shadow">
                 <div className="relative">
                   <div
@@ -123,7 +150,7 @@ export default function AirbnbsPage() {
                       <DollarSign className="w-5 h-5 text-amber-600" />
                       <div>
                         <div className="text-sm text-gray-500">Price per night</div>
-                        <div className="font-semibold text-lg">KES {airbnb.price_per_night.toLocaleString()}</div>
+                        <div className="font-semibold text-lg">$ {airbnb.price_per_night.toLocaleString()}</div>
                       </div>
                     </div>
                     <div className="flex gap-2">

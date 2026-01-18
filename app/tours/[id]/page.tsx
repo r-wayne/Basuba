@@ -180,7 +180,7 @@ export default function TourDetailPage() {
                     <div>
                       <div className="text-sm text-gray-500">Price per person</div>
                       <div className="text-2xl font-bold text-gray-900">
-                        KES {tour.price_per_person.toLocaleString()}
+                        $ {tour.price_per_person.toLocaleString()}
                       </div>
                     </div>
                   </div>

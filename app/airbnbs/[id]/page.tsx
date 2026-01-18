@@ -164,7 +164,7 @@ export default function AirbnbDetailPage() {
                     <div>
                       <div className="text-sm text-gray-500">Price per night</div>
                       <div className="text-2xl font-bold text-gray-900">
-                        KES {airbnb.price_per_night.toLocaleString()}
+                        $ {airbnb.price_per_night.toLocaleString()}
                       </div>
                     </div>
                   </div>
@@ -185,7 +185,7 @@ export default function AirbnbDetailPage() {
                 </Button>
 
                 <p className="text-xs text-gray-500 text-center">
-                  You won't be charged yet. Booking details will be sent to WhatsApp for confirmation.
+                  You won&apos;t be charged yet. Booking details will be sent to WhatsApp for confirmation.
                 </p>
               </CardContent>
             </Card>

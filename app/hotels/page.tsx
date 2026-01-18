@@ -12,36 +12,38 @@ import Link from 'next/link';
 
 export default function HotelsPage() {
   const searchParams = useSearchParams();
-  const destinationFilter = searchParams.get('destination');
+  const regionFilter = searchParams.get('region');
+  const maxPriceFilter = searchParams.get('maxPrice');
 
   const [hotels, setHotels] = useState<(Hotel & { destination?: Destination })[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedHotel, setSelectedHotel] = useState<Hotel | null>(null);
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [priceFilter, setPriceFilter] = useState<number | null>(maxPriceFilter ? parseInt(maxPriceFilter) : null);
 
   useEffect(() => {
     async function fetchHotels() {
-      let query = supabase.from('hotels').select('*, destinations(*)');
-
-      if (destinationFilter) {
-        query = query.eq('destination_id', destinationFilter);
-      }
-
-      const { data, error } = await query.order('rating', { ascending: false });
+      const { data, error } = await supabase.from('hotels').select('*, destinations(*)').order('rating', { ascending: false });
 
       if (data && !error) {
-        setHotels(
-          data.map((hotel: any) => ({
-            ...hotel,
-            destination: hotel.destinations,
-          }))
-        );
+        let filteredHotels = data.map((hotel: any) => ({
+          ...hotel,
+          destination: hotel.destinations,
+        }));
+
+        if (regionFilter) {
+          filteredHotels = filteredHotels.filter(hotel =>
+            hotel.destination?.name?.toLowerCase().includes(regionFilter.toLowerCase())
+          );
+        }
+
+        setHotels(filteredHotels);
       }
       setLoading(false);
     }
 
     fetchHotels();
-  }, [destinationFilter]);
+  }, [regionFilter]);
 
   const handleBookNow = (hotel: Hotel) => {
     setSelectedHotel(hotel);
@@ -72,13 +74,38 @@ export default function HotelsPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {hotels.length === 0 ? (
+        {/* Filter Section */}
+        <div className="mb-8 bg-white rounded-lg shadow-sm border p-6">
+          <h3 className="text-lg font-semibold mb-4">Filter Hotels</h3>
+          <div className="flex flex-wrap gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Max Price (USD)</label>
+              <input
+                type="number"
+                placeholder="Any price"
+                value={priceFilter || ''}
+                onChange={(e) => setPriceFilter(e.target.value ? parseInt(e.target.value) : null)}
+                className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+              />
+            </div>
+            <div className="flex items-end">
+              <Button
+                onClick={() => setPriceFilter(null)}
+                variant="outline"
+              >
+                Clear Filters
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {hotels.filter(hotel => !priceFilter || hotel.price_per_night <= priceFilter).length === 0 ? (
           <div className="text-center py-16">
             <p className="text-xl text-gray-600">No hotels found for this destination.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {hotels.map((hotel) => (
+            {hotels.filter(hotel => !priceFilter || hotel.price_per_night <= priceFilter).map((hotel) => (
               <Card key={hotel.id} className="overflow-hidden hover:shadow-2xl transition-shadow">
                 <div
                   className="h-64 bg-cover bg-center relative"
@@ -124,7 +151,7 @@ export default function HotelsPage() {
                     <div>
                       <div className="text-sm text-gray-500">From</div>
                       <div className="text-2xl font-bold text-amber-600">
-                        KES {hotel.price_per_night.toLocaleString()}
+                        $ {hotel.price_per_night.toLocaleString()}
                         <span className="text-sm font-normal text-gray-600">/night</span>
                       </div>
                     </div>

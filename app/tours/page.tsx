@@ -12,37 +12,38 @@ import Link from 'next/link';
 
 export default function ToursPage() {
   const searchParams = useSearchParams();
-  const destinationFilter = searchParams.get('destination');
+  const regionFilter = searchParams.get('region');
+  const maxPriceFilter = searchParams.get('maxPrice');
 
   const [tours, setTours] = useState<(Tour & { destination?: Destination })[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedTour, setSelectedTour] = useState<Tour | null>(null);
   const [bookingOpen, setBookingOpen] = useState(false);
-  const [priceFilter, setPriceFilter] = useState<number | null>(null);
+  const [priceFilter, setPriceFilter] = useState<number | null>(maxPriceFilter ? parseInt(maxPriceFilter) : null);
 
   useEffect(() => {
     async function fetchTours() {
-      let query = supabase.from('tours').select('*, destinations(*)');
-
-      if (destinationFilter) {
-        query = query.eq('destination_id', destinationFilter);
-      }
-
-      const { data, error } = await query.order('price_per_person');
+      const { data, error } = await supabase.from('tours').select('*, destinations(*)').order('price_per_person');
 
       if (data && !error) {
-        setTours(
-          data.map((tour: any) => ({
-            ...tour,
-            destination: tour.destinations,
-          }))
-        );
+        let filteredTours = data.map((tour: any) => ({
+          ...tour,
+          destination: tour.destinations,
+        }));
+
+        if (regionFilter) {
+          filteredTours = filteredTours.filter(tour =>
+            tour.destination?.name?.toLowerCase().includes(regionFilter.toLowerCase())
+          );
+        }
+
+        setTours(filteredTours);
       }
       setLoading(false);
     }
 
     fetchTours();
-  }, [destinationFilter]);
+  }, [regionFilter]);
 
   const handleBookNow = (tour: Tour) => {
     setSelectedTour(tour);
@@ -78,7 +79,7 @@ export default function ToursPage() {
           <h3 className="text-lg font-semibold mb-4">Filter Tours</h3>
           <div className="flex flex-wrap gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Max Price (KES)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Max Price (USD)</label>
               <input
                 type="number"
                 placeholder="Any price"
@@ -148,7 +149,7 @@ export default function ToursPage() {
                            <DollarSign className="w-5 h-5 text-amber-600" />
                            <div>
                              <div className="text-sm text-gray-500">Price per person</div>
-                             <div className="font-semibold">KES {tour.price_per_person.toLocaleString()}</div>
+                             <div className="font-semibold">$ {tour.price_per_person.toLocaleString()}</div>
                            </div>
                          </div>
 

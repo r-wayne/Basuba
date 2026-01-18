@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="bg-gradient-to-br from-amber-900 to-orange-950 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="bg-white/10 p-2 rounded-lg">
@@ -58,6 +58,19 @@ export function Footer() {
                 <span className="text-sm text-amber-100">info@basubaadventures.com</span>
               </li>
             </ul>
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-lg mb-4">Payment</h3>
+            <div className="bg-green-900/30 border border-green-700 rounded-lg p-3">
+              <p className="text-sm text-green-100 mb-2">
+                <strong>M-Pesa Payments:</strong>
+              </p>
+              <p className="text-sm text-amber-100">
+                Paybill: <strong>222111</strong><br />
+                Account: <strong>2321644</strong>
+              </p>
+            </div>
           </div>
 
           <div>

@@ -165,7 +165,7 @@ export default function DestinationDetailPage() {
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="text-lg font-bold text-amber-600">
-                        KES {tour.price_per_person.toLocaleString()}
+                        $ {tour.price_per_person.toLocaleString()}
                       </div>
                       <Link href={`/tours/${tour.id}`}>
                         <Button size="sm">View Details</Button>
@@ -206,7 +206,7 @@ export default function DestinationDetailPage() {
                   <CardContent>
                     <div className="flex items-center justify-between">
                       <div className="text-lg font-bold text-amber-600">
-                        KES {hotel.price_per_night.toLocaleString()}/night
+                        $ {hotel.price_per_night.toLocaleString()}/night
                       </div>
                       <Link href={`/hotels/${hotel.id}`}>
                         <Button size="sm">View Details</Button>
@@ -257,7 +257,7 @@ export default function DestinationDetailPage() {
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="text-lg font-bold text-amber-600">
-                        KES {airbnb.price_per_night.toLocaleString()}/night
+                        $ {airbnb.price_per_night.toLocaleString()}/night
                       </div>
                       <Link href={`/airbnbs/${airbnb.id}`}>
                         <Button size="sm">View Details</Button>
