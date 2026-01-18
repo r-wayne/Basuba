@@ -54,6 +54,7 @@ export default function Home() {
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               Discover the
               <span className="block text-amber-400">Soul of Africa</span>
+              <span className="block text-white">with Basuba Adventures</span>
             </h1>
             <p className="text-xl sm:text-2xl mb-8 text-gray-200 leading-relaxed">
               Embark on unforgettable safari adventures with Basuba Adventures through Africa&apos;s most spectacular landscapes and encounter wildlife in their natural habitat.
@@ -199,7 +200,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Start Your Adventure
+              Start Your Basuba Adventures
             </h2>
             <p className="text-xl text-gray-600">
               Browse our carefully curated safari experiences
