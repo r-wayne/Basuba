@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Compass, Hotel, Mountain, Award, Users, Shield } from 'lucide-react';
+import { Compass, Hotel, Mountain, Award, Users, Shield, MapPin, Clock, Star, Bed } from 'lucide-react';
 
 export default function Home() {
   const router = useRouter();
@@ -192,6 +192,406 @@ export default function Home() {
                 </CardDescription>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Top Destinations Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Top Destinations
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Link href="/destinations" className="group">
+              <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg">
+                <div
+                  className="absolute inset-0 bg-cover bg-center transform group-hover:scale-110 transition-transform duration-500"
+                  style={{ backgroundImage: 'url(https://www.tkadventures.co.ke/uploads/destinations/tk-destination-maasai-mara.webp)' }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <h3 className="text-2xl font-bold">Maasai Mara</h3>
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/destinations" className="group">
+              <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg">
+                <div
+                  className="absolute inset-0 bg-cover bg-center transform group-hover:scale-110 transition-transform duration-500"
+                  style={{ backgroundImage: 'url(https://www.tkadventures.co.ke/uploads/destinations/tk-destination-diani.webp)' }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <h3 className="text-2xl font-bold">Diani Beach</h3>
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/destinations" className="group">
+              <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg">
+                <div
+                  className="absolute inset-0 bg-cover bg-center transform group-hover:scale-110 transition-transform duration-500"
+                  style={{ backgroundImage: 'url(https://www.tkadventures.co.ke/uploads/destinations/tk-destination-mount-kenya.webp)' }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <h3 className="text-2xl font-bold">Mount Kenya</h3>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Tours Section */}
+      <section className="py-20 bg-gradient-to-b from-amber-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Featured Tours
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="border-amber-200 hover:shadow-xl transition-shadow overflow-hidden">
+              <div className="relative h-56 bg-cover bg-center" style={{ backgroundImage: 'url(https://www.tkadventures.co.ke/uploads/tours/tk-tour-5-days-maasai-mara-amboseli-tsavo-east-safari.webp)' }}>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-xl">5 Days Maasai Mara, Amboseli & Tsavo East Safari</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-base leading-relaxed mb-4">
+                  The famous Mara is renowned for its great herds of plain game, black-maned lions, leopard and cheetah but also contains numerous elephant and virtually&hellip;
+                </CardDescription>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center text-gray-600">
+                    <Clock className="w-4 h-4 mr-2" />
+                    <span className="text-sm font-medium">5 days</span>
+                  </div>
+                  <Link href="/tours">
+                    <Button size="sm" className="bg-amber-600 hover:bg-amber-700">
+                      View Details
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-amber-200 hover:shadow-xl transition-shadow overflow-hidden">
+              <div className="relative h-56 bg-cover bg-center" style={{ backgroundImage: 'url(https://www.tkadventures.co.ke/uploads/tours/tk-tour-mount-kilimanjaro-hike-marangu-route-6-days.webp)' }}>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-xl">Mount Kilimanjaro Hike Marangu Route (6 Days)</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-base leading-relaxed mb-4">
+                  Climb Africa&apos;s highest mountain, the mighty Kilimanjaro!
+                </CardDescription>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center text-gray-600">
+                    <Clock className="w-4 h-4 mr-2" />
+                    <span className="text-sm font-medium">6 days</span>
+                  </div>
+                  <Link href="/tours">
+                    <Button size="sm" className="bg-amber-600 hover:bg-amber-700">
+                      View Details
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-amber-200 hover:shadow-xl transition-shadow overflow-hidden">
+              <div className="relative h-56 bg-cover bg-center" style={{ backgroundImage: 'url(https://www.tkadventures.co.ke/uploads/tours/tk-tour-7-days-maasai-mara-lake-nakuru-samburu-and-aberdares.webp)' }}>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-xl">7 Days Maasai Mara, Lake Nakuru, Samburu And Aberdares</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-base leading-relaxed mb-4">
+                  Masai Mara Game reserve has a high concentration of wild animals and this makes the adventure amazing and joyful. Picnic lunch will be served and ther&hellip;
+                </CardDescription>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center text-gray-600">
+                    <Clock className="w-4 h-4 mr-2" />
+                    <span className="text-sm font-medium">7 days</span>
+                  </div>
+                  <Link href="/tours">
+                    <Button size="sm" className="bg-amber-600 hover:bg-amber-700">
+                      View Details
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center mt-12">
+            <Link href="/tours">
+              <Button size="lg" variant="outline" className="border-amber-600 text-amber-600 hover:bg-amber-50">
+                More Tours
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Hotels Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Featured Hotels
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="border-amber-200 hover:shadow-xl transition-shadow overflow-hidden">
+              <div className="relative h-48 bg-cover bg-center" style={{ backgroundImage: 'url(https://www.tkadventures.co.ke/uploads/hotels/tk-hotel-baobab-beach-resort-spa.webp)' }}>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              </div>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg">Baobab Beach Resort & Spa</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center text-gray-600 mb-3">
+                  <MapPin className="w-4 h-4 mr-1" />
+                  <span className="text-sm">Diani</span>
+                </div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center text-amber-600">
+                    <Star className="w-4 h-4 mr-1 fill-current" />
+                    <span className="text-sm font-medium">AI</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-lg font-bold text-gray-900">KES 8,400</span>
+                    <span className="text-xs text-gray-500">/night</span>
+                  </div>
+                </div>
+                <Link href="/hotels">
+                  <Button size="sm" className="w-full bg-amber-600 hover:bg-amber-700">
+                    See Details
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="border-amber-200 hover:shadow-xl transition-shadow overflow-hidden">
+              <div className="relative h-48 bg-cover bg-center" style={{ backgroundImage: 'url(https://www.tkadventures.co.ke/uploads/hotels/tk-hotel-neptune-village-beach-resort-spa.webp)' }}>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              </div>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg">Neptune Village Beach Resort & Spa</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center text-gray-600 mb-3">
+                  <MapPin className="w-4 h-4 mr-1" />
+                  <span className="text-sm">Diani</span>
+                </div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center text-amber-600">
+                    <Star className="w-4 h-4 mr-1 fill-current" />
+                    <span className="text-sm font-medium">AI</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-lg font-bold text-gray-900">KES 6,900</span>
+                    <span className="text-xs text-gray-500">/night</span>
+                  </div>
+                </div>
+                <Link href="/hotels">
+                  <Button size="sm" className="w-full bg-amber-600 hover:bg-amber-700">
+                    See Details
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="border-amber-200 hover:shadow-xl transition-shadow overflow-hidden">
+              <div className="relative h-48 bg-cover bg-center" style={{ backgroundImage: 'url(https://www.tkadventures.co.ke/uploads/hotels/tk-hotel-alba-hotel.webp)' }}>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              </div>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg">Alba Hotel</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center text-gray-600 mb-3">
+                  <MapPin className="w-4 h-4 mr-1" />
+                  <span className="text-sm">Meru</span>
+                </div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center text-amber-600">
+                    <Star className="w-4 h-4 mr-1 fill-current" />
+                    <span className="text-sm font-medium">FB</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-lg font-bold text-gray-900">KES 6,400</span>
+                    <span className="text-xs text-gray-500">/night</span>
+                  </div>
+                </div>
+                <Link href="/hotels">
+                  <Button size="sm" className="w-full bg-amber-600 hover:bg-amber-700">
+                    See Details
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="border-amber-200 hover:shadow-xl transition-shadow overflow-hidden">
+              <div className="relative h-48 bg-cover bg-center" style={{ backgroundImage: 'url(https://www.tkadventures.co.ke/uploads/hotels/tk-hotel-diani-sea-resort.webp)' }}>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              </div>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg">Diani Sea Resort</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center text-gray-600 mb-3">
+                  <MapPin className="w-4 h-4 mr-1" />
+                  <span className="text-sm">Diani</span>
+                </div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center text-amber-600">
+                    <Star className="w-4 h-4 mr-1 fill-current" />
+                    <span className="text-sm font-medium">AI</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-lg font-bold text-gray-900">KES 10,300</span>
+                    <span className="text-xs text-gray-500">/night</span>
+                  </div>
+                </div>
+                <Link href="/hotels">
+                  <Button size="sm" className="w-full bg-amber-600 hover:bg-amber-700">
+                    See Details
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center mt-12">
+            <Link href="/hotels">
+              <Button size="lg" variant="outline" className="border-amber-600 text-amber-600 hover:bg-amber-50">
+                More Hotels
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Airbnbs Section */}
+      <section className="py-20 bg-gradient-to-b from-amber-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Featured Airbnbs
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="border-amber-200 hover:shadow-xl transition-shadow overflow-hidden">
+              <div className="relative h-56 bg-cover bg-center" style={{ backgroundImage: 'url(https://www.tkadventures.co.ke/uploads/airbnbs/tk-airbnb-nanyuki-5-bedroom-a1.webp)' }}>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-xl">Nanyuki 5 Bedroom A1</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center text-gray-600 mb-3">
+                  <MapPin className="w-4 h-4 mr-1" />
+                  <span className="text-sm">Nanyuki</span>
+                </div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center text-gray-600">
+                    <Bed className="w-4 h-4 mr-1" />
+                    <span className="text-sm">5 Bedrooms</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-lg font-bold text-gray-900">KES 25,000</span>
+                    <span className="text-xs text-gray-500">/night</span>
+                  </div>
+                </div>
+                <Link href="/airbnbs">
+                  <Button size="sm" className="w-full bg-amber-600 hover:bg-amber-700">
+                    See Details
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="border-amber-200 hover:shadow-xl transition-shadow overflow-hidden">
+              <div className="relative h-56 bg-cover bg-center" style={{ backgroundImage: 'url(https://www.tkadventures.co.ke/uploads/airbnbs/tk-airbnb-diani-2-bedroom-a3.webp)' }}>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-xl">Diani 2 Bedroom A3</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center text-gray-600 mb-3">
+                  <MapPin className="w-4 h-4 mr-1" />
+                  <span className="text-sm">Diani</span>
+                </div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center text-gray-600">
+                    <Bed className="w-4 h-4 mr-1" />
+                    <span className="text-sm">2 Bedrooms</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-lg font-bold text-gray-900">KES 7,000</span>
+                    <span className="text-xs text-gray-500">/night</span>
+                  </div>
+                </div>
+                <Link href="/airbnbs">
+                  <Button size="sm" className="w-full bg-amber-600 hover:bg-amber-700">
+                    See Details
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="border-amber-200 hover:shadow-xl transition-shadow overflow-hidden">
+              <div className="relative h-56 bg-cover bg-center" style={{ backgroundImage: 'url(https://www.tkadventures.co.ke/uploads/airbnbs/tk-airbnb-mombasa-3-bedroom-a5.webp)' }}>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-xl">Mombasa 3 Bedroom A5</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center text-gray-600 mb-3">
+                  <MapPin className="w-4 h-4 mr-1" />
+                  <span className="text-sm">Nyali, Mombasa</span>
+                </div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center text-gray-600">
+                    <Bed className="w-4 h-4 mr-1" />
+                    <span className="text-sm">3 Bedrooms</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-lg font-bold text-gray-900">KES 11,000</span>
+                    <span className="text-xs text-gray-500">/night</span>
+                  </div>
+                </div>
+                <Link href="/airbnbs">
+                  <Button size="sm" className="w-full bg-amber-600 hover:bg-amber-700">
+                    See Details
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center mt-12">
+            <Link href="/airbnbs">
+              <Button size="lg" variant="outline" className="border-amber-600 text-amber-600 hover:bg-amber-50">
+                More Airbnbs
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
