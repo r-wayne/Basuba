@@ -67,10 +67,10 @@ export function Footer() {
                 <strong>M-Pesa Payments:</strong>
               </p>
               <p className="text-sm text-amber-100">
-                Paybill: <strong>222111</strong><br />
-                Account: <strong>2321644</strong>
+                Paybill: <strong>542542</strong><br />
+                Account: <strong>190088</strong>
               </p>
-            </div>
+            </div>  
           </div>
 
           <div>
